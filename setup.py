@@ -81,13 +81,13 @@ def Docker():
     print(stdout.read().decode('utf-8'))
     for num in range(1, 4):
         stdin, stdout, stderr = client.exec_command(
-            'sudo docker run -e DB_NAME=wordpress'+str(num)+' -e DB_PASSWORD=pass -e DB_USER=wpuser -e DB_HOST="$LC_WPIP" --name wordpress'+str(num)+' -d -p 8'+str(num)+':80 wordpress', environment={"LC_WPIP": privateip})
+            'sudo docker run -e DB_NAME=wordpress'+str(num)+' -e DB_PASSWORD=pass -e DB_USER=wpuser -e DB_HOST='+privateip+' --name wordpress'+str(num)+' -d -p 8'+str(num)+':80 wordpress')
         print(stdout.read().decode('utf-8'))
         stdin, stdout, stderr = client.exec_command('sudo docker inspect wordpress'+str(num)+' --format "{{ .NetworkSettings.IPAddress }}"')
         containerip = stdout.read().decode('utf-8')
         containerip = containerip.rstrip('\n')
         stdin, stdout, stderr = client.exec_command('cd ~ && sudo python database.py wordpress'+str(num)+' '+containerip)
-    stdin, stdout, stderr = client.exec_command('sudo docker run -e IP="$LC_LBIP" --name loadbalancer -d -p 80:80 loadbalancer', environment={"LC_LBIP": publicip})
+    stdin, stdout, stderr = client.exec_command('sudo docker run -e IP='+publicip+' --name loadbalancer -d -p 80:80 loadbalancer')
     print(stdout.read().decode('utf-8'))
 
     client.close()
