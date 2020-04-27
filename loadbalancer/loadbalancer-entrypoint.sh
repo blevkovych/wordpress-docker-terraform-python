@@ -17,10 +17,10 @@ echo '  proxy_redirect    off;'                                       >> /etc/ng
 echo '  add_header Pragma "no-cache";'                                >> /etc/nginx/sites-available/default
 echo '  add_header Cache-Control "no-cache";'                         >> /etc/nginx/sites-available/default
 echo "  proxy_pass http://website;"                                   >> /etc/nginx/sites-available/default
-echo "  sub_filter 'action=\"/'  'action=\"/';"                       >> /etc/nginx/sites-available/default
-echo "  sub_filter 'href=\"/'  'href=\"/';"                           >> /etc/nginx/sites-available/default
-echo "  sub_filter 'src=\"/'  'src=\"/'"                              >> /etc/nginx/sites-available/default
-echo "  sub_filter_once off;"                                         >> /etc/nginx/sites-available/default
+#echo "  sub_filter 'action=\"/'  'action=\"/';"                       >> /etc/nginx/sites-available/default
+#echo "  sub_filter 'href=\"/'  'href=\"/';"                           >> /etc/nginx/sites-available/default
+#echo "  sub_filter 'src=\"/'  'src=\"/'"                              >> /etc/nginx/sites-available/default
+#echo "  sub_filter_once off;"                                         >> /etc/nginx/sites-available/default
 echo "  }"                                                            >> /etc/nginx/sites-available/default
 echo "}"                                                              >> /etc/nginx/sites-available/default
 exec "$@"
